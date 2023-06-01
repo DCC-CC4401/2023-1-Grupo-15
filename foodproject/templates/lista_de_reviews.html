@@ -31,6 +31,7 @@
           <li>Calificación de precio: {{ review.calificacion_precio }}</li>
           <li>Calificación de presentación: {{ review.calificacion_presentacion }}</li>
           <li>Comentario: {{ review.comentario }}</li>
+          <p><a href="{% url 'edit_review' review.id %}">Edit</a></p>
         </ul>
       </article>
       <hr>

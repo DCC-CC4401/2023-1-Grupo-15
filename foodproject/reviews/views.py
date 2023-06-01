@@ -2,7 +2,7 @@
 from django.http import HttpResponse
 from django.template import Template, Context
 from django.template.loader import get_template
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from reviews.models import User
 from reviews.models import Puesto_de_comida
 from django.http import HttpResponseRedirect
@@ -39,9 +39,10 @@ def register_user(request):
         nombre = request.POST['name']
         contraseña = request.POST['password']
         mail = request.POST['email']
+        pronombre = request.POST['pronombre']
 
         #Crear el nuevo usuario
-        user = User.objects.create_user(username=nombre, password=contraseña, email=mail)
+        user = User.objects.create_user(username=nombre, password=contraseña, email=mail, pronombre=pronombre)
 
      #Redireccionar la página /tareas
         return HttpResponseRedirect('/home')
@@ -65,7 +66,6 @@ def login_request(request):
             messages.error(request,"Usuario o contraseña inválidos")
     form = AuthenticationForm()
     return render(request=request, template_name="registration/login.html", context={"login_form":form})
-
 # Vista que permite mostrar la página de la lista de reseñas
 # Cuando se intenta acceder a reviews/ se ejecuta esta vista
 def lista_de_reviews(request):
@@ -117,3 +117,10 @@ def Crear_reseña(request):
             cleaned_data = form_crear_reseña.cleaned_data
             Evaluacion.objects.create(**cleaned_data, usuario=request.user)
         return render(request, "crear_reseña.html", {"form_tarea": form_crear_reseña})
+
+def editar_reseña(request, id):
+    post = get_object_or_404(Evaluacion, id=id)
+
+    if request.method == 'GET':
+        context = {'form' : CrearReseñaForm, "id": id}
+        return render(request, "post_reseña.html", context)

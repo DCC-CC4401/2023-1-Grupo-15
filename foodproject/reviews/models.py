@@ -34,7 +34,3 @@ class Evaluacion(models.Model):
 
     def __str__(self):
         return "f'{self.usuario.username} evaluo {self.local_comida.comida.nombre}'"
-    
-
- 
-    
