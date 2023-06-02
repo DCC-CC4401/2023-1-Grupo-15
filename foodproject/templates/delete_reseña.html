@@ -7,8 +7,8 @@
   {% csrf_token %}
   <p>¿Estás segur@ que deseas borrar la reseña al puesto de comida: "{{post.local_comida}}"?</p>
   <div>
-    <button type="submit">Yes, Delete</button>
-    <a href="{% url 'review_list' %}">Cancel</a>
+    <button type="submit">Sí, borrar</button>
+    <a href="{% url 'review_list' %}">Cancelar</a>
   </div>
 </form>
 
