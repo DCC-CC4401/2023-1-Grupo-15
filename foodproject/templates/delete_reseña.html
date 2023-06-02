@@ -1,0 +1,15 @@
+{% extends 'base.html' %} 
+
+{% block content %}
+<h2>Borrar Reseña</h2>
+
+<form method="POST">
+  {% csrf_token %}
+  <p>¿Estás segur@ que deseas borrar la reseña al puesto de comida: "{{post.local_comida}}"?</p>
+  <div>
+    <button type="submit">Yes, Delete</button>
+    <a href="{% url 'review_list' %}">Cancel</a>
+  </div>
+</form>
+
+{% endblock content %}

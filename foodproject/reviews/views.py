@@ -134,3 +134,15 @@ def editar_reseña(request, id):
         else:
             messages.error(request, "Los siguientes campos son erróneos: ")
             return render(request, "post_reseña.html", {'form': form})
+
+def borrar_reseña(request, id):
+    post = get_object_or_404(Evaluacion, pk=id)
+    context = {'post': post}    
+    
+    if request.method == 'GET':
+        return render(request, 'delete_reseña.html', context)
+    
+    elif request.method == 'POST':
+        post.delete()
+        messages.success(request, "La reseña se ha borrado correctamente")
+        return redirect('review_list')
