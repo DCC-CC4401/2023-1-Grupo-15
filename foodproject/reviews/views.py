@@ -122,5 +122,15 @@ def editar_reseña(request, id):
     post = get_object_or_404(Evaluacion, id=id)
 
     if request.method == 'GET':
-        context = {'form' : CrearReseñaForm, "id": id}
+        context = {'form' : CrearReseñaForm(instance=post), "id": id}
         return render(request, "post_reseña.html", context)
+    
+    elif request.method == 'POST':
+        form = CrearReseñaForm(request.POST, instance=post)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Los cambios se han realizado con exito")
+            return redirect('review_list')
+        else:
+            messages.error(request, "Los siguientes campos son erróneos: ")
+            return render(request, "post_reseña.html", {'form': form})

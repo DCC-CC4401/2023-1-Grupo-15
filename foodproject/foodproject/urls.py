@@ -28,7 +28,7 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
     path('mapa/', include ('mapa.urls'), name='mapa'),
     path('login/', login_request, name="login"),
-    path('reviews/', lista_de_reviews),
+    path('reviews/', lista_de_reviews, name="review_list"),
     path('crear_reseña', Crear_reseña),
     path('stores/', stores, name='test'),
     path('search_store/', search_store),
