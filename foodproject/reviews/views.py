@@ -23,9 +23,7 @@ def home(request):
 # Vista que permite mostrar el perfil de un usuario
 # Cuando se intenta acceder a profile/ se ejecuta esta vista
 def perfil(request):
-    advices = get_template("perfil.html")
-    ad_response = advices.render()
-    return HttpResponse(ad_response)   
+    return render(request=request, template_name="perfil.html") 
 
 # Vista que permite mostrar la página de registro de un usuario
 # Cuando se intenta acceder a register/ se ejecuta esta vista
