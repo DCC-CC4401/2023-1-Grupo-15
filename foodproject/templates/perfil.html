@@ -34,7 +34,7 @@
               <div class="col-6">
                 <div class="social-info">
                   <i class="fas fas fa-users mr-2" style="color: #92A9BD"></i>
-                  <span>Female</span>
+                  <span>Pronombres: {{request.user.pronombre }}</span>
                 </div>
               </div>
             </div>
@@ -42,7 +42,7 @@
               <div class="col-6">
                 <div class="social-info">
                   <i class="fas fas fa-envelope mr-2" style="color: #92A9BD"></i>
-                  <span>like@example.com</span>
+                  <span>{{request.user.email}}</span>
                 </div>
               </div>
             </div>
@@ -53,11 +53,12 @@
         <div class="card info-card hello">
           <div class="card-body">
             <h2 class="text-blue">Mis Reseñas</h2>
+            {% for review in reviews_usuario %}  
             <div class="row">
               <div class="col-lg-8">
-                <h5>Lugar</h5>
+                <h5>{{review.local_comida}}</h5>
                 <div class="mb-3">
-                  <p>Muy buen lugar... super rico los sabores de helados y los demás productos que venden... el lugar está bien ubicado, es fácil llegar... tiene mesitas afuera, atienden rápido y bien... son muy amables las chicas que trabajan ahí... todo limpio y ordenado, dentro y fuera del local... totalmente recomendable. </p>
+                  <p>{{review.comentario}} </p>
                 </div>
               </div>
               <div class="col-lg-4">
@@ -70,9 +71,7 @@
                 </div>
               </div>
             </div>
-            <div class="row">
-              <div class="col-lg-8">
-            </div>
+            {% endfor %}
             <div class="col-lg-5">
               <button class="btn see-more" id="see-more" data-toggle="modal" data-target="#exampleModal">Ver Más ></button>
             </div>

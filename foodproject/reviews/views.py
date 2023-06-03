@@ -9,6 +9,7 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth.forms import AuthenticationForm
 from reviews.forms import NewUserForm, CrearReseñaForm
 from django.contrib.auth import login, authenticate #add this
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages #add this
 from reviews.models import Evaluacion
 from django.views.generic.list import ListView
@@ -22,8 +23,10 @@ def home(request):
 
 # Vista que permite mostrar el perfil de un usuario
 # Cuando se intenta acceder a profile/ se ejecuta esta vista
+@login_required
 def perfil(request):
-    return render(request=request, template_name="perfil.html") 
+    reviews_usuario = Evaluacion.objects.filter(usuario_id=request.user)
+    return render(request, "perfil.html", {"reviews_usuario": reviews_usuario}) 
 
 # Vista que permite mostrar la página de registro de un usuario
 # Cuando se intenta acceder a register/ se ejecuta esta vista
@@ -64,6 +67,7 @@ def login_request(request):
             messages.error(request,"Usuario o contraseña inválidos")
     form = AuthenticationForm()
     return render(request=request, template_name="registration/login.html", context={"login_form":form})
+
 # Vista que permite mostrar la página de la lista de reseñas
 # Cuando se intenta acceder a reviews/ se ejecuta esta vista
 def lista_de_reviews(request):
