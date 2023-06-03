@@ -32,6 +32,6 @@ urlpatterns = [
     path('crear_reseña', Crear_reseña),
     path('stores/', stores, name='test'),
     path('search_store/', search_store),
-    path('reviews/edit/<int:id>/', editar_reseña, name="edit_review"),
-    path('reviews/delete/<int:id>/', borrar_reseña, name="delete_review")
+    path('profile/edit/<int:id>/', editar_reseña, name="edit_review"),
+    path('profile/delete/<int:id>/', borrar_reseña, name="delete_review")
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

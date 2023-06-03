@@ -132,7 +132,7 @@ def editar_reseña(request, id):
         if form.is_valid():
             form.save()
             messages.success(request, "Los cambios se han realizado con exito")
-            return redirect('review_list')
+            return redirect('profile')
         else:
             messages.error(request, "Los siguientes campos son erróneos: ")
             return render(request, "post_reseña.html", {'form': form})
@@ -147,4 +147,4 @@ def borrar_reseña(request, id):
     elif request.method == 'POST':
         post.delete()
         messages.success(request, "La reseña se ha borrado correctamente")
-        return redirect('review_list')
+        return redirect('profile')

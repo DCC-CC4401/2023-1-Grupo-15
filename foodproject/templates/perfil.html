@@ -95,62 +95,41 @@
           <table class="table table-bordered">
             <thead>
               <tr>
-                <th scope="col"></th>
-                <th class="w-50" scope="col">Reseña</th>
-                <th scope="col">Fecha</th>
-                <th scope="col">Lugar</th>
-                <th scope="col"></th>  
+                <th scope="col">Reseña</th>
+                <th scope="col">Comida</th>
+                <th scope="col">Presentación</th>
+                <th scope="col">Precio</th>
+                <th scope="col">Lugar</th>  
               </tr>
             </thead>
             <tbody>
+            {% for review in reviews_usuario %}
               <tr>
-                <th scope="row">1</th>
-                <td>Muy buen lugar... super rico los sabores de helados y los demás productos que venden... el lugar está bien ubicado, es fácil llegar... tiene mesitas afuera, atienden rápido y bien... son muy amables las chicas que trabajan ahí... todo limpio y ordenado, dentro y fuera del local... totalmente recomendable.</td>
-                <td>14-01-2023</td>
-                <td>Lugar</td>
+                <td>{{review.comentario}}</td>
+                <td>{{review.calificacion_comida}}</td>
+                <td>{{review.calificacion_presentacion}}</td>
+                <td>{{review.calificacion_precio}}</td>
+                <td>{{review.local_comida}}</td>
                 <td>
                   <ul class="list-inline m-0">
                     <li class="list-inline-item">
-                      <button class="btn btn-success btn-sm rounded-0" type="button" data-toggle="tooltip" data-placement="top" title="Editar"><i class="fa fa-edit"></i></button>
+                      <a href="{% url 'edit_review' review.id %}">
+                        <button class="btn btn-success btn-sm rounded-0" type="button" data-toggle="tooltip" data-placement="top" title="Editar">
+                        <i class="fa fa-edit"></i>
+                        </button>
+                      </a>
                     </li>
                     <li class="list-inline-item">
-                      <button class="btn btn-danger btn-sm rounded-0" type="button" data-toggle="tooltip" data-placement="top" title="Borrar"><i class="fa fa-trash"></i></button>
+                      <a href="{% url 'delete_review' review.id%}">
+                        <button class="btn btn-danger btn-sm rounded-0" type="button" data-toggle="tooltip" data-placement="top" title="Borrar">
+                          <i class="fa fa-trash"></i>
+                        </button>
+                      </a>  
                     </li>
                   </ul>
                 </td>
               </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>La comida es muy rica. La comida es muy rica. La comida es muy rica. La comida es muy rica. La comida es muy rica.</td>
-                <td>31-12-2022</td>
-                <td>Lugar</td>
-                <td>
-                  <ul class="list-inline m-0">
-                    <li class="list-inline-item">
-                      <button class="btn btn-success btn-sm rounded-0" type="button" data-toggle="tooltip" data-placement="top" title="Editar"><i class="fa fa-edit"></i></button>
-                    </li>
-                    <li class="list-inline-item">
-                        <button class="btn btn-danger btn-sm rounded-0" type="button" data-toggle="tooltip" data-placement="top" title="Borrar"><i class="fa fa-trash"></i></button>
-                    </li>
-                  </ul>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td>La comida es muy rica. La comida es muy rica. La comida es muy rica. La comida es muy rica. La comida es muy rica.</td>
-                <td>31-10-2022</td>
-                <td>Lugar</td>
-                <td>
-                  <ul class="list-inline m-0">
-                    <li class="list-inline-item">
-                      <button class="btn btn-success btn-sm rounded-0" type="button" data-toggle="tooltip" data-placement="top" title="Editar"><i class="fa fa-edit"></i></button>
-                    </li>
-                    <li class="list-inline-item">
-                      <button class="btn btn-danger btn-sm rounded-0" type="button" data-toggle="tooltip" data-placement="top" title="Borrar"><i class="fa fa-trash"></i></button>
-                    </li>
-                  </ul>
-                </td>
-              </tr>
+            {% endfor %}  
             </tbody>
           </table>
         </div>
@@ -164,7 +143,6 @@
 </div>
 </div>
 </body>
-{% else %}
 <script src="{% static 'js/jquery.min.js' %}"></script>
 <script src="{% static 'js/bundle.min.js' %}"></script>
 <script>
